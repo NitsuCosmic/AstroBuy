@@ -1,4 +1,5 @@
 import { NavBar } from "./components/layout/NavBar";
+import { ProductsPage } from "./pages/ProductsPage";
 
 function App() {
 	return (
@@ -6,6 +7,9 @@ function App() {
 			<header className="font-rubik shadow">
 				<NavBar />
 			</header>
+			<main className="p-2 max-w-screen-2xl mx-auto">
+				<ProductsPage />
+			</main>
 		</>
 	);
 }

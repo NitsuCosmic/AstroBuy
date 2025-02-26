@@ -1,5 +1,13 @@
+import { NavBar } from "./components/layout/NavBar";
+
 function App() {
-	return <></>;
+	return (
+		<>
+			<header className="font-rubik shadow">
+				<NavBar />
+			</header>
+		</>
+	);
 }
 
 export default App;

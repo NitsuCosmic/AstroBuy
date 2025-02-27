@@ -4,3 +4,11 @@
 @theme {
 	--font-rubik: "Rubik", system-ui, serif;
 }
+
+body {
+	background-color: #f3f3f3;
+}
+
+.text-box {
+	text-box: ex alphabetic;
+}

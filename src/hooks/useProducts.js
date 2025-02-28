@@ -2,34 +2,33 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../services/api";
 
 const useProducts = () => {
-	const [products, setProducts] = useState(null);
-	const [limit, setLimit] = useState(null);
-	const [total, setTotal] = useState(null);
+	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [skip, setSkip] = useState(0);
 
 	useEffect(() => {
 		const getProducts = async () => {
 			setIsLoading(true);
 			try {
-				const response = await fetch(`${BASE_URL}/products`);
-				if (!response.ok) throw new Error(`Error fetching products`);
+				const response = await fetch(`${BASE_URL}/products?skip=${skip}`);
 				const data = await response.json();
-				const { limit, products, total } = data;
-				setProducts(products);
-				setLimit(limit);
-				setTotal(total);
-				console.log(products);
+				setProducts((prev) => [...prev, ...data.products]);
+				console.log(data.products);
 			} catch (err) {
-				console.error(`Error fetching products: ${err}`);
+				console.error(err);
 			} finally {
 				setIsLoading(false);
 			}
 		};
 
 		getProducts();
-	}, []);
+	}, [skip]);
 
-	return { products, isLoading };
+	const loadMore = () => {
+		setSkip((prev) => prev + 30);
+	};
+
+	return { products, isLoading, loadMore };
 };
 
 export default useProducts;
